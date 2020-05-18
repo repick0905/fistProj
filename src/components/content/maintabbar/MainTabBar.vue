@@ -39,7 +39,5 @@ export default {
 </script>
 
 <style>
-main-tab-bar{
-  z-index: 99999;
-}
+
 </style>

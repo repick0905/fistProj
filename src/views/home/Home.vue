@@ -11,7 +11,7 @@
       class="tab-control"
     ></tab-control>
     <scroll
-      class="content"
+      class="home-content"
       ref="scroll"
       :probe-type="3"
       @scroll="contentScroll"
@@ -65,7 +65,8 @@ export default {
       curType: "pop",
       isShowBackTop: false,
       tabOffestTop: 0,
-      isTabFixed: false
+      isTabFixed: false,
+      saveY: 0
     };
   },
   computed: {
@@ -85,6 +86,13 @@ export default {
     this.$bus.$on("imgLoaded", () => {
       refresh();
     });
+  },
+  activated() {
+    this.$refs.scroll.scrollTo(0, this.saveY, 0);
+    this.$refs.scroll.refresh();
+  },
+  deactivated() {
+    this.saveY = this.$refs.scroll.getScrollY();
   },
   methods: {
     /**
@@ -169,7 +177,7 @@ export default {
   height: 100vh;
   position: relative;
 }
-.content {
+.home-content {
   overflow: hidden;
 
   position: absolute;
